@@ -15,7 +15,7 @@ window.onload = function(){
 	assert(true, "the test suite is running.");
 
 	//can create flower
-	var myFlower = new flower("she", 10);
+	var myFlower = new Flower("she", 10);
 	
 	//get number of petals which should be 10
     var origPetalCount = myFlower.petals();
@@ -41,11 +41,11 @@ window.onload = function(){
 	var actualMessage = myFlower.result();
 
 	assert(expectedMessage === actualMessage, "she loves me not");
-	
+	assert(myFlower.isItLove() === false,"it should not be love");
 	
 
 	//can create flower with zero petals
-	var myFlowerWithoutPetals = new flower("she", 0);
+	var myFlowerWithoutPetals = new Flower("she", 0);
 	assert(myFlowerWithoutPetals.petals() === 0, "removed a petal expectedCount " + 0 + " actual " + myFlowerWithoutPetals.petals());
 
 	

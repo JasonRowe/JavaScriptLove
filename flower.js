@@ -1,4 +1,4 @@
-function flower(thee, numberOfPetals) {
+function Flower(thee, numberOfPetals) {
     var petals = numberOfPetals;
 
     if(!petals && petals !== 0){
@@ -17,10 +17,14 @@ function flower(thee, numberOfPetals) {
         return petals;
     };
 
+    this.isItLove = function(){
+        return petals % 2 === 0;
+    };
+
     this.result = function(){
         var message;
 
-        if(petals % 2 === 0){
+        if(this.isItLove()){
             message = thee + " loves me";
         }
         else{
