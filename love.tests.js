@@ -1,7 +1,5 @@
 //Tests for love.js file
 
-//TEST
-
 //simple assertion function
 function assert(value, desc){
 	var li = document.createElement("li");
@@ -23,8 +21,6 @@ window.onload = function(){
 	//assert that we have the expected 10 petals
 	assert(origPetalCount === 10, "the number of petals is correct - " + origPetalCount);
 
-
-
 	//can get she loves me result when we have even number of petals (10)
 	var expectedMessage = "she loves me";
 	var actualMessage = myFlower.result();
@@ -34,7 +30,8 @@ window.onload = function(){
 	var actualCount = myFlower.removePetal();
 	assert(expectedCount === actualCount, "removed a petal expectedCount " + expectedCount + " actual " + actualCount);
 
-
+    //test totalPetals()
+	assert(origPetalCount == myFlower.totalPetals(), "should still be able to retrieve original total petal count for calculations")
 
 	//assert the message has now changed
 	var expectedMessage = "she loves me not";
@@ -43,16 +40,12 @@ window.onload = function(){
 	assert(expectedMessage === actualMessage, "she loves me not");
 	assert(myFlower.isItLove() === false,"it should not be love");
 	
-
 	//can create flower with zero petals
 	var myFlowerWithoutPetals = new Flower("she", 0);
 	assert(myFlowerWithoutPetals.petals() === 0, "removed a petal expectedCount " + 0 + " actual " + myFlowerWithoutPetals.petals());
 
-	
-	
 	//try to remove a petal when the flower has zero petals
 	var petalCountShouldNotBeNegative = myFlowerWithoutPetals.removePetal();
 	assert(myFlowerWithoutPetals.petals() === 0, "removed a petal expectedCount " + 0 + " actual " + myFlowerWithoutPetals.petals());
-
 }
 

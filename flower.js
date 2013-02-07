@@ -5,6 +5,12 @@ function Flower(thee, numberOfPetals) {
         petals = Math.floor(Math.random()* 5) + 5;
     }
 
+    var originalTotalNumberOfPetals = petals;
+
+    this.totalPetals = function () {
+        return originalTotalNumberOfPetals;
+    }
+
     this.removePetal = function(){
         if(petals > 0){
             petals = petals - 1;
