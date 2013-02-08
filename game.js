@@ -14,7 +14,7 @@ $(function() {
         var gameValues = new PlayerSelectedValues();
         log("Game Values Created");
 
-        var flower = new Flower(gameValues.thee());
+        var flower = new Flower(gameValues.sex());
         log("Flower Created");
         log("# of Flower Petals " + flower.petals());
 
@@ -28,6 +28,13 @@ $(function() {
 function FlowerView(flowerData, gameValues){
 
     var loveOrNot$ = $("#loveOrNot");
+
+    if (typeof (Raphael) !== "function") {
+        // no Raphael!
+        throw "interactions: Raphaël not found. Please ensure Raphael.js is referenced before the interactions.js file.";
+    }
+
+    this.r = Raphael(flower, 100, 100);
 
     for(var i = 0; i < flowerData.petals(); i++){
         log("creating petal");
@@ -58,11 +65,11 @@ function FlowerView(flowerData, gameValues){
 function GameOver(flowerData, gameValues){
     log("game over");
 
-    var finalWords = gameValues.name() + " is your true love!";
+    var finalWords = "Ah, " + gameValues.name() + " loves you!";
 
     if(!flowerData.isItLove())
     {
-        finalWords = "Oh dear, " + gameValues.name() + "might have to make this up to you!";
+        finalWords = "Oh dear, " + gameValues.name() + " should make this up to you!";
     }
 
     $("#loveNote").append("<h1>" + finalWords + "</H1>");
@@ -73,26 +80,24 @@ function RemoveIntro(){
 }
 
 function PlayerSelectedValues() {
-    var theeElm$ = $('input[name=sex]:radio:checked');
+    var sex = $('input[name=sex]:radio:checked').val();
 
-    //set a default for selected sex
-    var thee = "Thee";
-
-    //use value selected by user
-    if(theeElm$)
-    {
-        thee = theeElm$.val();
-        log("selected sex was " + thee);
-    }
+    log("selected sex was " + sex);
 
     var name$ = $('#name');
 
     //set a default value for name
-    var name = "Thee";
+    var name = "someone";
 
      if(name$)
      {
-        name = name$.val();
+        var nameValue = name$.val();
+
+        if(nameValue)
+        {
+            name = name$.val();
+        }
+
         log("selected name was " + name);
     }
 
@@ -101,8 +106,8 @@ function PlayerSelectedValues() {
         return name;
     };
 
-    this.thee = function()
+    this.sex = function()
     {
-        return thee;
+        return sex;
     };
 }

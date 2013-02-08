@@ -33,12 +33,13 @@ window.onload = function(){
     //test totalPetals()
 	assert(origPetalCount == myFlower.totalPetals(), "should still be able to retrieve original total petal count for calculations")
 
-	//assert the message has now changed
-	var expectedMessage = "she loves me not";
+	//assert the message has now changed after doing a toggle
+	var expectedMessage = "she loves me";
+	myFlower.toggleLove();
 	var actualMessage = myFlower.result();
 
-	assert(expectedMessage === actualMessage, "she loves me not");
-	assert(myFlower.isItLove() === false,"it should not be love");
+	assert(expectedMessage === actualMessage, "she loves me");
+	assert(myFlower.isItLove() === true,"it should love");
 	
 	//can create flower with zero petals
 	var myFlowerWithoutPetals = new Flower("she", 0);

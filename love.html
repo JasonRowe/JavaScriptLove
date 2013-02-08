@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Love?</title>
+    <title>loves me loves me not - game</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="flower.js"></script>
     <script src="game.js"></script>
     <script src="log.js"></script>
     <link rel="stylesheet" href="love.css" />
+    <link href='http://fonts.googleapis.com/css?family=Gravitas+One' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
     <div id="wrapper">
         <div id="game">
             <div id="loveNote">
-                <h1 id="loveOrNot">love me, love me not</h1>
+                <h1 id="loveOrNot">loves me loves me not</h1>
             </div>
             <div id="intro">
                 <form>
-                    <input type="radio" name="sex" value="He">He<br>
+                    <input type="radio" name="sex" checked value="He">He
                     <input type="radio" name="sex" value="She">She<br>
-                    <input type="radio" name="sex" value="Thee">Thee<br>
                     <span>Name</span><input type="text" id="name"></input>
                     <input type="button" id="start" value="start"></input>
                 </form>
             </div>
             <div id="gameArea">
+                <div id="flower"></div>
             </div>
         </div>
     </div>

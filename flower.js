@@ -23,14 +23,21 @@ function Flower(thee, numberOfPetals) {
         return petals;
     };
 
+    var love = false;
+
+    this.toggleLove = function(){
+        love = !love;
+        return love;
+    };
+
     this.isItLove = function(){
-        return petals % 2 === 0;
+        return love;
     };
 
     this.result = function(){
         var message;
 
-        if(this.isItLove()){
+        if(this.toggleLove()){
             message = thee + " loves me";
         }
         else{
