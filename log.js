@@ -1,4 +1,6 @@
 function log(){
+   var alertFallback = false;
+
 	try{
 		console.log.apply(console, arguments);
 	}
@@ -7,7 +9,9 @@ function log(){
 			opera.postError.apply(opera, arguments);
 		}
 		catch(e){
-			alert(Array.prototype.join.call(arguments, " "));
+			if(alertFallback){
+				alert(Array.prototype.join.call(arguments, " "));
+			}
 		}
 	}
 }

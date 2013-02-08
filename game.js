@@ -7,7 +7,7 @@
 // Introduction
 $(function() {
     // setup click event for submit
-    $("#start").click(function() {
+    $("#start").click(function(event) {
         event.preventDefault();
 		log("Handler for start .click() called.");
 
@@ -34,21 +34,35 @@ function FlowerView(flowerData, gameValues){
         throw "interactions: Raphaël not found. Please ensure Raphael.js is referenced before the interactions.js file.";
     }
 
-    this.r = Raphael(flower, 100, 100);
+    this.r = Raphael(flower, 300, 300);
+
+    var circle = this.r.circle(150, 150, 25);
+
+    // Sets the fill attribute of the circle to red (#f00)
+    circle.attr("fill", "#000");
+
+    // Sets the stroke attribute of the circle to white
+    circle.attr("stroke", "#fff");
 
     for(var i = 0; i < flowerData.petals(); i++){
         log("creating petal");
 
-        //create unique petalId...
-        var petalId = "petal" + i;
+        // Creates circle Polar coordinate system
+        var radius = 73;
+        var xPosition = radius * Math.cos(2 * Math.PI * i / flowerData.petals());
+        var yPosition = radius * Math.sin(2 * Math.PI * i / flowerData.petals());
 
-        //append new petal with id
-        $("#gameArea").append("<div id='"+ petalId +"'>Petal</div>");
+        var circle = this.r.circle(xPosition + 150, yPosition + 150, 50);
 
-         //create div and add handler for id
-        $("#" + petalId).on("click", function(){ 
+        // Sets the fill attribute of the circle to red (#f00)
+        circle.attr("fill", "#f00");
+
+        // Sets the stroke attribute of the circle to white
+        circle.attr("stroke", "#fff");
+
+        circle.click( function(){ 
             flowerData.removePetal();
-            $(this).remove();
+            this.remove();
             log("removed petal, now only " + flowerData.petals() + " left");
 
             //show love message
@@ -58,7 +72,7 @@ function FlowerView(flowerData, gameValues){
             {
                 GameOver(flowerData, gameValues);
             }
-        }); 
+        });
     }
 };
 
