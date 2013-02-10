@@ -40,35 +40,29 @@ function FlowerView(flowerData, gameValues){
     stem.attr({stroke:'#47D147',"stroke-width":5});
 
     stem.attr("width", 5);
-
-    var circle = this.paper.circle(150, 150, 25);
-
-    // Sets the fill attribute of the center circle 
-    circle.attr("fill", "#EBEB65");
-
-    // Sets the stroke attribute of the circle to white
-    circle.attr("stroke", "#fff");
-
     for(var i = 0; i < flowerData.petals(); i++){
         log("creating petal");
 
         // Creates circle Polar coordinate system
         var radius = 73;
-        var xPosition = radius * Math.cos(2 * Math.PI * i / flowerData.petals());
-        var yPosition = radius * Math.sin(2 * Math.PI * i / flowerData.petals());
+        var xPosition = radius * Math.cos(2 * Math.PI * i / flowerData.petals()) + 150;
+        var yPosition = radius * Math.sin(2 * Math.PI * i / flowerData.petals()) + 150;
 
 
-        var circle = this.paper.circle(xPosition + 150, yPosition + 150, 50);
+        var petalEllipse = this.paper.ellipse(xPosition, yPosition, 50, 70);
+
+        //rotate ellipse around center
+        petalEllipse.transform("r90");
 
         // Sets the fill attribute of the circle to red (#f00)
         var color = Raphael.getColor(0.82);
-        circle.attr("fill", "#fff");
+        petalEllipse.attr("fill", "#fff");
 
         // Sets the stroke attribute of the circle to white
-        circle.attr("stroke", "#000");
-        circle.attr("stroke-opacity", 0.1);
+        petalEllipse.attr("stroke", "#000");
+        petalEllipse.attr("stroke-opacity", 0.1);
 
-        circle.click( function(){ 
+        petalEllipse.click( function(){ 
             flowerData.removePetal();
             this.remove();
             log("removed petal, now only " + flowerData.petals() + " left");
@@ -82,6 +76,14 @@ function FlowerView(flowerData, gameValues){
             }
         });
     }
+
+    var flowerCenter = this.paper.circle(150, 150, 25);
+
+    // Sets the fill attribute of the center circle 
+    flowerCenter.attr("fill", "#EBEB65");
+
+    // Sets the stroke attribute of the circle to white
+    flowerCenter.attr("stroke", "#fff");
 };
 
 function GameOver(flowerData, gameValues){
