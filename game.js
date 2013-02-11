@@ -34,7 +34,7 @@ function FlowerView(flowerData, gameValues){
         throw "interactions: Raphaël not found. Please ensure Raphael.js is referenced before the interactions.js file.";
     }
 
-    this.paper = Raphael(flower, 300, 600);
+    this.paper = Raphael(flower, 350, 650);
 
     var stem = this.paper.path("M 150 150, Q 210 227 150 300 Q 70 400 150 450")
     stem.attr({stroke:'#47D147',"stroke-width":5});
@@ -44,15 +44,38 @@ function FlowerView(flowerData, gameValues){
         log("creating petal");
 
         // Creates circle Polar coordinate system
-        var radius = 73;
-        var xPosition = radius * Math.cos(2 * Math.PI * i / flowerData.petals()) + 150;
-        var yPosition = radius * Math.sin(2 * Math.PI * i / flowerData.petals()) + 150;
 
+        var radius = 83;
+        var centerX = 170;
+        var centerY = 160;
+        var xPosition = radius * Math.cos(2 * Math.PI * i / flowerData.petals()) + centerX;
+        var yPosition = radius * Math.sin(2 * Math.PI * i / flowerData.petals()) + centerY;
 
-        var petalEllipse = this.paper.ellipse(xPosition, yPosition, 50, 70);
+        var ellipseHeight = 70;
+        var petalEllipse = this.paper.ellipse(xPosition, yPosition, 30, ellipseHeight);
+
+        var angle = null;
+
+        if(xPosition !== centerX){
+
+            var triangle = new TrianglePointsToDegrees(xPosition, yPosition, centerX, centerY, xPosition, yPosition + ellipseHeight)
+        
+            //the following needs work...
+            if(xPosition > centerX){
+                angle = triangle.cDegree();
+            }
+            else if(xPosition < centerX && yPosition < centerY){
+                angle = -triangle.cDegree();
+            }
+            else if(xPosition !== centerX){
+                angle = -triangle.cDegree();
+            }
+        }
 
         //rotate ellipse around center
-        petalEllipse.transform("r90");
+        if(angle){
+            petalEllipse.transform("r" + angle);
+        }
 
         // Sets the fill attribute of the circle to red (#f00)
         var color = Raphael.getColor(0.82);
@@ -77,7 +100,7 @@ function FlowerView(flowerData, gameValues){
         });
     }
 
-    var flowerCenter = this.paper.circle(150, 150, 25);
+    var flowerCenter = this.paper.circle(centerX, centerY, 25);
 
     // Sets the fill attribute of the center circle 
     flowerCenter.attr("fill", "#EBEB65");

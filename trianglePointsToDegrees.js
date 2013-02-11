@@ -1,6 +1,6 @@
 
 //Given a triangle with points (x1, y1, x2, y2, x3, y3),
-// finds angles A,B,C and edges a,b,c
+// calculates angles A,B,C and edges a,b,c
 //
 //
 //     lower case a,b,c are the edges
@@ -14,7 +14,7 @@
 //               c
 function TrianglePointsToDegrees(x1, y1, x2, y2, x3, y3){
 	
-    //use distance formula to find lengths between (x1,y1) (x2,y2) and (x3,y3) named a,b,c
+    //distance formula to find lengths between points
 	function lineDistance( point1, point2 ){
 		var xs = 0;
 		var ys = 0;
@@ -64,6 +64,8 @@ function TrianglePointsToDegrees(x1, y1, x2, y2, x3, y3){
     var sideb = edgeB.distance;
     var sidec = edgeC.distance;
 
+   log("calc angles");
+
 	var anga = Math.acos((-sidea*sidea+sideb*sideb+sidec*sidec)/(2*sideb*sidec));
 	var angb = Math.acos((-sideb*sideb+sidea*sidea+sidec*sidec)/(2*sidea*sidec));
 	var angc = Math.acos((-sidec*sidec+sidea*sidea+sideb*sideb)/(2*sidea*sideb));
@@ -79,5 +81,4 @@ function TrianglePointsToDegrees(x1, y1, x2, y2, x3, y3){
 	this.cDegree = function(){
 		return angc*180/Math.PI;
 	};
-
 }
