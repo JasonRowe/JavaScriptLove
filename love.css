@@ -18,8 +18,12 @@ html{
 	text-align: center;
 }
 
+#ad{
+	text-align: center;
+}
+
 #flower{
-	width: 300px;
+	width: 350px;
 	margin-left: auto ;
   	margin-right: auto ;
 }

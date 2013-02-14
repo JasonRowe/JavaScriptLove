@@ -1,4 +1,4 @@
-
+//by Jason Rowe - jasonrowe.com @jsonrow 2013
 //Given a triangle with points (x1, y1, x2, y2, x3, y3),
 // calculates angles A,B,C and edges a,b,c
 //

@@ -1,3 +1,4 @@
+// by Jason Rowe - jasonrowe.com @jsonrow
 function Flower(thee, numberOfPetals) {
     var petals = numberOfPetals;
 

@@ -6,10 +6,9 @@
 
 // Introduction
 $(function() {
-    // setup click event for submit
-    $("#start").click(function(event) {
-        event.preventDefault();
-		log("Handler for start .click() called.");
+
+    function startGame(){
+        log("Handler for start .click() called.");
 
         var gameValues = new PlayerSelectedValues();
         log("Game Values Created");
@@ -22,7 +21,22 @@ $(function() {
 
         //setup petals and click event handlers
         FlowerView(flower, gameValues);
+    };
+
+    // setup click event for submit
+    $("#start").click(function(event) {
+        event.preventDefault();
+        startGame();
 	});
+
+     $("#name").keypress(function(e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+
+        if (code == 13) {
+            startGame();
+            return false;
+        }
+    });
 });
 
 function FlowerView(flowerData, gameValues){
@@ -60,7 +74,7 @@ function FlowerView(flowerData, gameValues){
 
             var triangle = new TrianglePointsToDegrees(xPosition, yPosition, centerX, centerY, xPosition, yPosition + ellipseHeight)
         
-            //the following needs work...
+            //the following needs
             if(xPosition > centerX){
                 angle = triangle.cDegree();
             }
