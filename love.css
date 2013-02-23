@@ -27,3 +27,7 @@ html{
 	margin-left: auto ;
   	margin-right: auto ;
 }
+
+.petals{
+	cursor: pointer;
+}

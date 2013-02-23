@@ -93,7 +93,8 @@ function FlowerView(flowerData, gameValues){
         // Sets the fill attribute of the circle to red (#f00)
         var color = Raphael.getColor(0.82);
         petalEllipse.attr("fill", "#fff");
-
+        petalEllipse.node.setAttribute("class","petals");
+        
         // Sets the stroke attribute of the circle to white
         petalEllipse.attr("stroke", "#000");
         petalEllipse.attr("stroke-opacity", 0.1);
