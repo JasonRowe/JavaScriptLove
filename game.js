@@ -41,11 +41,13 @@ $(function() {
 
 function FlowerView(flowerData, gameValues){
 
+    var debug = false;
+
     var loveOrNot$ = $("#loveOrNot");
 
     if (typeof (Raphael) !== "function") {
         // no Raphael!
-        throw "interactions: Raphaël not found. Please ensure Raphael.js is referenced before the interactions.js file.";
+        throw "Please ensure Raphael.js is referenced.";
     }
 
     this.paper = Raphael(flower, 350, 650);
@@ -62,6 +64,7 @@ function FlowerView(flowerData, gameValues){
         var radius = 83;
         var centerX = 170;
         var centerY = 160;
+
         var xPosition = radius * Math.cos(2 * Math.PI * i / flowerData.petals()) + centerX;
         var yPosition = radius * Math.sin(2 * Math.PI * i / flowerData.petals()) + centerY;
 
@@ -74,14 +77,10 @@ function FlowerView(flowerData, gameValues){
 
             var triangle = new TrianglePointsToDegrees(xPosition, yPosition, centerX, centerY, xPosition, yPosition + ellipseHeight)
         
-            //the following needs
             if(xPosition > centerX){
                 angle = triangle.cDegree();
             }
-            else if(xPosition < centerX && yPosition < centerY){
-                angle = -triangle.cDegree();
-            }
-            else if(xPosition !== centerX){
+            else{
                 angle = -triangle.cDegree();
             }
         }
@@ -121,6 +120,37 @@ function FlowerView(flowerData, gameValues){
 
     // Sets the stroke attribute of the circle to white
     flowerCenter.attr("stroke", "#fff");
+    
+    //debug code
+    if(debug){
+        //draw the circle used to position petals
+        var debugCircle = this.paper.circle(centerX, centerY, radius);
+        debugCircle.attr("stroke", "#aba");
+
+        //draw x, y grid
+        var vLine = paper.path("M" + centerX + " 500 L" + centerX +" 0");
+        vLine.attr("stroke", "#aba");
+
+        var hLine = paper.path("M0 " + centerY + " 350 " + centerY);
+        hLine.attr("stroke", "#aba");
+
+        var debugCircle = this.paper.circle(centerX, centerY, radius);
+        debugCircle.attr("stroke", "#aba");
+
+        for(var i = 0; i < flowerData.petals(); i++){
+            
+            var xPosition = radius * Math.cos(2 * Math.PI * i / flowerData.petals()) + centerX;
+            var yPosition = radius * Math.sin(2 * Math.PI * i / flowerData.petals()) + centerY;
+
+            var t = paper.text(xPosition, yPosition, "(" + xPosition.toFixed(0) + "," + yPosition.toFixed(0) + ")");
+
+            var debugRadians = this.paper.circle(xPosition, yPosition, 1);
+            debugRadians.attr("fill", "#aba");
+
+            var petalTransformDebug = this.paper.path("M" + xPosition + ", " + yPosition + "," + centerX + "," + centerY + "," + xPosition + "," + (yPosition + ellipseHeight) + "z");
+            petalTransformDebug.attr("stroke", "#aba");
+         }
+    }
 };
 
 function GameOver(flowerData, gameValues){
