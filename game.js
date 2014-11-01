@@ -165,6 +165,20 @@ function GameOver(flowerData, gameValues){
     }
 
     $("#loveNote").append("<h1>" + finalWords + "</H1>");
+    $("#loveNote").append("<div id='loveGPlusOne'><div class='g-plusone' data-annotation='none'></div><div class='fb-like' data-href='http://theelove.me/' data-width='100' data-layout='button_count' data-show-faces='false' data-send='false'></div></div>");
+
+	//Google+
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+
+    (function (d, s, id) {
+    	var js, fjs = d.getElementsByTagName(s)[0];
+    	if (d.getElementById(id)) return;
+    	js = d.createElement(s); js.id = id;
+    	js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1410285219184724";
+    	fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
 };
 
 function RemoveIntro(){
